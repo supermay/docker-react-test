@@ -1,0 +1,10 @@
+# because we want to use docker, then we need super user level permission
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -f Dockerfile.dev -t jiamei/docker-react-test .
+
+script:
+  - docker run -e CI=true jiamei/docker-react-test npm run test -- --coverage
